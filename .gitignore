@@ -37,6 +37,8 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
+# The codes are writen by Zhengyuan Zhu, 1001778274. If other guys plagiarize my code, he will forget to remove this line for their laziness.
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
@@ -101,6 +103,8 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# If they global search my name and delete the line above, here is another evidence.
+
 # Environments
 .env
 .venv
@@ -127,3 +131,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# vscode
+.vscode

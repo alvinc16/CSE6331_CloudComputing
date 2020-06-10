@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<header>
+    <div class="container">
+		<div id="brandname">
+			People Informations
+		</div>
+	</div>
+	</header>
+	<p style="color:blue;font-size:20;text-align: center;"><b>Results for your operation</b></p>
+	{% for p in people %}
+	<h3>The people you find {{ p[0] }}</h3>
+    <img src="{{ p[1] }}">
+	{% endfor %}
+</body>
+</html>

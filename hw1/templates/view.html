@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Flask-Cloudy</title>
+</head>
+
+<body>
+    <h1 align='center'>Flask - Information Retrieval System: View File</h1>
+    <h2><a href="{{ url_for('index') }}"><- Home</a></h2>
+    <h3 align='center'> The information of your csv file </h3>
+    <br>
+    <table align='center'>
+        <thead>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Room</th>
+            <th>Telnum</th>
+            <th>Picture</th>
+            <th>Keywords</th>
+        </thead>
+        <tbody>
+            {% if info %}
+            {% for i in info %}
+            <tr>
+                <td>{{ i[0] }}</td>
+                <td>{{ i[1] }}</td>
+                <td>{{ i[2] }}</td>
+                <td>{{ i[3] }}</td>
+                <td>{{ i[4] }}</td>
+                <td>{{ i[5] }}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+    <h2> Search </h2>
+    <h3> Search people picture</h3>
+    <form action="{{ url_for('search_people')}}" method="POST">
+        <p>Type the name of people</p>
+        <textarea name="pplname" rows="1" cols="10"></textarea>
+        <br/>
+        <input type="submit" class="btn-info" value="search image">
+    </form>
+    <h3> Search by salary </h3>
+    <form action="{{ url_for('search_people_by_salary')}}" method="POST">
+        <p>Search people whose salary less than</p>
+        <textarea name="min_salary" rows="1" cols="10"></textarea>
+        <br/>
+        <input type="submit" class="btn-info" value="search image">
+    </form>
+    <hr>
+    <h2> Add </h2>
+    <h3> Add people </h3>
+    <form action="{{ url_for('add_people_info')}}" method="POST">
+        <p>Please fill out people information</p>
+        <table align='center'>
+            <thead>
+                <th>Target Name</th>
+                <th>Target Salary</th>
+                <th>Target Room</th>
+                <th>Target Telecom</th>
+                <th>Target Keywords</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><textarea name="ppl_name" rows="1" cols="10"></textarea></td>
+                    <td><textarea name="ppl_salary" rows="1" cols="10"></textarea></td>
+                    <td><textarea name="ppl_room" rows="1" cols="10"></textarea></td>
+                    <td><textarea name="ppl_telnum" rows="1" cols="10"></textarea></td>
+                    <td><textarea name="ppl_keywords" rows="1" cols="10"></textarea></td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+        <input type="submit" class="btn-info" value="apply add">
+    </form>
+    <h3> Add picture </h3>
+	<form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+		<input type="file" name="file" id="fileToUpload"> 
+		<br><br>
+		<input type="submit" value="Upload Image" name="submit">
+	</form>
+    <hr>
+    <h2> Remove </h2>
+    <h3> Remove people </h3>
+    <form action="{{ url_for('remove_people')}}" method="POST">
+        <p>The people name you want to remove</p>
+        <textarea name="rm_name" rows="1" cols="10"></textarea>
+        <br/>
+        <input type="submit" class="btn-info" value="apply remove">
+    </form>
+    <hr>
+    <h2> Change </h2>
+    <h3> Change people information </h3>
+        <form action="{{ url_for('change_people_info')}}" method="POST">
+            <p>Who and which area you want to change</p>
+            <textarea name="change_people" rows="1" cols="10"></textarea>
+            <textarea name="change_area" rows="1" cols="10"></textarea>
+            <br/>
+            <p>The value you want</p>
+            <textarea name="target_value" rows="1" cols="10"></textarea>
+            <br/>
+            <input type="submit" class="btn-info" value="apply change">
+        </form>
+    </body>
+</html>
