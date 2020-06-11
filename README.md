@@ -1,6 +1,10 @@
 # CSE-6331 Cloud Computing based on Google Cloud
 
-## Setup Environment
+## Demo Endpoint
+1. Google App Engine: http://myresearch.uc.r.appspot.com/
+2. IBM Cloud: http://zzy824.us-south.cf.appdomain.cloud/
+
+## Setup Environment your own environment
 
 - For Local Test
 
