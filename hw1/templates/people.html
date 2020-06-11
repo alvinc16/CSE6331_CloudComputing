@@ -13,8 +13,11 @@
 	</div>
 	</header>
 	<p style="color:blue;font-size:20;text-align: center;"><b>Results for your operation</b></p>
-    <img src="{{ img_url }}">
-
+	{% if img_url %}
+	<img src="{{ img_url }}">
+	{% else %}
+	<h3>No picture to show</h3>
+	{% endif %}
 
 </body>
 </html>

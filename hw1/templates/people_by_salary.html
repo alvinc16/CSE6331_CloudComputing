@@ -13,9 +13,13 @@
 	</div>
 	</header>
 	<p style="color:blue;font-size:20;text-align: center;"><b>Results for your operation</b></p>
+	{% if people %}
 	{% for p in people %}
 	<h3>The people you find {{ p[0] }}</h3>
     <img src="{{ p[1] }}">
 	{% endfor %}
+	{% else %}
+	<h3>No people to show</h3>
+	{% endif %}
 </body>
 </html>

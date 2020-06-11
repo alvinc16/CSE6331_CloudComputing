@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, abort, redirect
 from flask_cloudy import Storage
-
+import os
 import pandas as pd
 
 curr_file = None
@@ -90,8 +90,8 @@ def remove_people():
 @app.route("/upload", methods=["POST"])
 def upload():
     usr_file = request.files.get("file")
-    my_object = storage.upload(usr_file)
-    return redirect(url_for("view", object_name=my_object.name))
+    storage.upload(usr_file)
+    return redirect("/")
 
 
 
@@ -99,6 +99,9 @@ def upload():
 def search_people():
     target_name = request.form['pplname']
     target_url = './files/'+target_name+'.jpg'
+    if not os.path.exists(target_url):
+        target_url = None
+        
     return render_template("people.html", img_url=target_url)
 
 
