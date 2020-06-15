@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Flask-Cloudy</title>
+</head>
+
+<body>
+    <h1 align='center'>Zhengyuan Zhu, 1001778274</h1>
+    <h1 align='center'>Flask - Information Retrieval System: View File</h1>
+    <h2><a href="{{ url_for('index') }}"><- Home</a></h2>
+    <h3 align='center'> The information of your csv file </h3>
+    <br>
+    <table align='center'>
+        <thead>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Room</th>
+            <th>State</th>
+            <th>Picture</th>
+            <th>Caption</th>
+        </thead>
+        <tbody>
+            {% if info %}
+            {% for i in info %}
+            <tr>
+                <td>{{ i[0] }}</td>
+                <td>{{ i[1] }}</td>
+                <td>{{ i[2] }}</td>
+                <td>{{ i[3] }}</td>
+                <td>{{ i[4] }}</td>
+                <td>{{ i[5] }}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+    <h2> Search </h2>
+    <h3> Search by Image </h3>
+    <form action="{{ url_for('search_people_by_img')}}" method="POST">
+        <p>Search people whose img name is </p>
+        <textarea name="img_name" rows="1" cols="10"></textarea>
+        <br/>
+        <input type="submit" class="btn-info" value="search people by img name">
+    </form>
+    <h3> Search people by ID</h3>
+    <form action="{{ url_for('search_people_by_id')}}" method="POST">
+        <p>Student ID</p>
+        <textarea name="stu_id" rows="1" cols="10"></textarea>
+        <br/>
+        <input type="submit" class="btn-info" value="search people by id">
+    </form>
+    <hr>
+    <h2> Change </h2>
+    <h3> Change people information </h3>
+        <form action="{{ url_for('change_people_info')}}" method="POST">
+            <p>Who you want to change</p>
+            <textarea name="change_people" rows="1" cols="10"></textarea>
+            <br/>
+            <p>The key word value you want</p>
+            <textarea name="target_value" rows="1" cols="10"></textarea>
+            <br/>
+            <input type="submit" class="btn-info" value="apply change">
+        </form>
+    </body>
+</html>
