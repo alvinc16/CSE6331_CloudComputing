@@ -1,4 +1,4 @@
-# CSE-6331 Cloud Computing based on Google Cloud
+# CSE-6331 Cloud Computing
 
 ## Demo Endpoint
 1. Google App Engine: http://myresearch.uc.r.appspot.com/
