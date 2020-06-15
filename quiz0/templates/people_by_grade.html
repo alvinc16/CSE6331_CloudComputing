@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1 align='center'>Zhengyuan Zhu, 1001778274</h1>
+	<header>
+    <div class="container">
+		<div id="brandname">
+			People Informations
+		</div>
+	</div>
+	</header>
+	<p style="color:blue;font-size:20;text-align: center;"><b>Results for your operation</b></p>
+    <p style="color:blue;font-size:20;text-align: center;"><b>Results for your operation</b></p>
+	{% if not p%}
+	<h3>no picture available</h3>
+	{% endif %}
+	{% for p in grade_resp %}
+	<h3>The people you find {{ p[0] }}</h3>
+	<h3>The people location you find {{ p[2] }}</h3>
+    <img src="{{ p[1] }}">
+	{% endfor %}
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/styles.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}"> -->
+</head>
+<body>
+	<h1 align='center'>Zhengyuan Zhu, 1001778274</h1>
+	<h1 align='center'>Flask - Information Retrieval System</h1>
+	<h2>Select csv/image files to upload:</h2>
+	<form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+		<input type="file" name="file" id="fileToUpload"> 
+		<br><br>
+		<input type="submit" value="Upload File" name="submit">
+	</form>
+
+	<hr>
+
+	<h2>List of files available on the storage:</h2>
+	<h3>You can view and operate by click csv file</h3>
+
+	<table>
+		<thead>
+			<th>CSV Name</th>
+			<th>CSV Size</th>
+		</thead>
+		<tbody>
+			{% for obj in csv_obj %}
+			<tr>
+				<td><a href="{{ url_for('view', object_name=obj.name) }}">{{ obj.name }}</a></td>
+				<td>{{ obj.size }} bytes</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<br>
+	<table>
+		<thead>
+			<th>Other File Name</th>
+			<th>Other File Size</th>
+		</thead>
+		<tbody>
+			{% for obj in other_obj %}
+			<tr>
+				<td><a href="{{ url_for('view', object_name=obj.name) }}">{{ obj.name }}</a></td>
+				<td>{{ obj.size }} bytes</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+	
+	
+
+</body>
+</html>
