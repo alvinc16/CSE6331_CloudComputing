@@ -1,0 +1,64 @@
+{# index page, providing a form to submit a city name #}
+{% extends "base.html" %}
+{% block title %}World Cities{% endblock %}
+{% block content %}
+<h1>1001778274, Zhu Zhengyuan</h1>
+<h2>Earthquake information retrieval system</h2>
+
+<hr>
+
+<p>
+ <form action="/search_largest_n" method="get">
+  Largest n earthquake in the last 30 days. Please input n: <br>
+  N: <input type="text" name="number" maxlength="200" width="60">
+  <input type="submit" value="Search">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/search_around_place" method="get">
+  Quakes occurred within x kilometer of city y in the last 30 days. Please input distance and city: <br>
+  Distance: <input type="distance" name="" maxlength="200" width="60">
+  City: <input type="city" name="" maxlength="200" width="60">
+  <input type="submit" value="Search">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/count_scale" method="get">
+  For the date range A through B, show how many quakes greater then Z on Richter scale. Please input A, B, Z.<br>
+  Start Date[YYYY-MM-DD]: <input type="text" name="start" maxlength="200" width="60"> 
+  End Date[YYYY-MM-DD]: <input type="text" name="end" maxlength="200" width="60"> 
+  Scale: <input type="text" name="scale" maxlength="200" width="60"> 
+  <input type="submit" value="Search">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/search_scale" method="get">
+  Show in most recent X days, how many quakes(Richter scale) happened of: 1-2, 2-3, 3-4, 4-5, 5-6, 6-7. Please input X: 
+  Most recent day X: <input type="text" name="number" maxlength="200" width="60"> 
+  <input type="submit" value="Search">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/compare_two_place" method="get">
+   Show whether quakes common within X km of place A than place B in the last 30 days. Please input X, A, B: <br>
+   Distance: <input type="text" name="distance" maxlength="200" width="60"> 
+   Place A: <input type="text" name="placeA" maxlength="200" width="60">
+   Place B: <input type="text" name="placeB" maxlength="200" width="60">
+   <input type="submit" value="Search">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/largest_around_place" method="get">
+  Show where did largest quake occur within X km of Y city in the last 30 days. Please input X, Y: <br>
+  Distance: <input type="text" name="distance" maxlength="200" width="60"> 
+  City: <input type="text" name="city" maxlength="200" width="60"> 
+  <input type="submit" value="Search">
+</form>
+</p>
+
+{% endblock %}
