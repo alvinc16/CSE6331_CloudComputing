@@ -40,28 +40,27 @@ For hw2, you need to export environment variable: `export DYLD_LIBRARY_PATH=[you
 
 1. Home Page
 
-<div style="text-align:center">
-    <img src="img/hw1_1.png" width="400" height="400"/>
-</div>
+<p align="center">
+  <img src="img/hw1_1.png" width="400" height="400"/>
+</p>
 
 2. Display items
 
-<div style="text-align:center">
-    <img src="img/hw1_2.png" width="600" height="400" />
-</div>
-
+<p align="center">
+  <img src="img/hw1_2.png" width="600" height="400" />
+</p>
 
 3. API: Search & Add
 
-<div style="text-align:center">
-    <img src="img/hw1_3.png" width="400" height="400" />
-</div>
+<p align="center">
+  <img src="img/hw1_3.png" width="400" height="400" />
+</p>
 
 4. API: Remove & Change
 
-<div style="text-align:center">
-    <img src="img/hw1_4.png" width="400" height="400" />
-</div>
+<p align="center">
+  <img src="img/hw1_4.png" width="400" height="400" />
+</p>
 
 ### Homework2
 
