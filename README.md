@@ -3,7 +3,7 @@
 ## Demo Endpoint
 
 1. IBM Cloud: http://zzy824.us-south.cf.appdomain.cloud/
-2. Google App Engine: http://myresearch.uc.r.appspot.com/**(deprecated)**
+2. Google App Engine: http://myresearch.uc.r.appspot.com/ **(deprecated)**
 
 ## Setup Environment
 
@@ -40,27 +40,28 @@ For hw2, you need to export environment variable: `export DYLD_LIBRARY_PATH=[you
 
 1. Home Page
 
-<center>
-<img src="img/hw1_1.png" width="400" height="400"/> <br>
-</center>
+<div style="text-align:center">
+    <img src="img/hw1_1.png" width="400" height="400"/>
+</div>
 
 2. Display items
 
-<center>
-<img src="img/hw1_2.png" width="600" height="400" /> <br>
-</center>
+<div style="text-align:center">
+    <img src="img/hw1_2.png" width="600" height="400" />
+</div>
+
 
 3. API: Search & Add
 
-<center>
-<img src="img/hw1_3.png" width="400" height="400" /> <br>
-</center>
+<div style="text-align:center">
+    <img src="img/hw1_3.png" width="400" height="400" />
+</div>
 
 4. API: Remove & Change
 
-<center>
-<img src="img/hw1_4.png" width="400" height="400" />
-</center>
+<div style="text-align:center">
+    <img src="img/hw1_4.png" width="400" height="400" />
+</div>
 
 ### Homework2
 
