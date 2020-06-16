@@ -2,8 +2,9 @@
 
 ## Demo Endpoint
 
-1. Google App Engine: http://myresearch.uc.r.appspot.com/**(deprecated)**
-2. IBM Cloud: http://zzy824.us-south.cf.appdomain.cloud/
+1. IBM Cloud: http://zzy824.us-south.cf.appdomain.cloud/
+2. Google App Engine: http://myresearch.uc.r.appspot.com/**(deprecated)**
+
 
 ## Setup Environment your own environment
 
@@ -38,19 +39,27 @@ cd hw1 && google app deploy
 
 1. Home Page
 
-<img src="img/hw1_1.png" width="400" height="400" /> <br>
+<center>
+<img src="img/hw1_1.png" width="400" height="400"/> <br>
+</center>
 
 2. Display items
 
+<center>
 <img src="img/hw1_2.png" width="600" height="400" /> <br>
+</center>
 
 3. API: Search & Add
 
+<center>
 <img src="img/hw1_3.png" width="400" height="400" /> <br>
+</center>
 
 4. API: Remove & Change
 
+<center>
 <img src="img/hw1_4.png" width="400" height="400" />
+</center>
 
 ### Homework2
 
