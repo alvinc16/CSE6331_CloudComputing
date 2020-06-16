@@ -5,8 +5,7 @@
 1. IBM Cloud: http://zzy824.us-south.cf.appdomain.cloud/
 2. Google App Engine: http://myresearch.uc.r.appspot.com/**(deprecated)**
 
-
-## Setup Environment your own environment
+## Setup Environment
 
 - For Local Test
 
@@ -32,6 +31,8 @@ cf push
 git clone https://github.com/824zzy/CSE6331_CloudComputing.git
 cd hw1 && google app deploy
 ```
+
+For hw2, you need to export environment variable: `export DYLD_LIBRARY_PATH=[your path to python]/site-packages/clidriver/lib:$DYLD_LIBRARY_PATH`
 
 ## Screen Shots
 
