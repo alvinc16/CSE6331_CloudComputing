@@ -1,0 +1,148 @@
+{# index page, providing a form to submit a city name #}
+{% extends "base.html" %}
+{% block title %}EarthQuake{% endblock %}
+{% block content %}
+<h1>1001778274, Zhu Zhengyuan</h1>
+<h2>Earthquake information retrieval system</h2>
+
+<hr>
+<p>
+  <form action="{{ url_for('cal_create') }}" method="get">
+   Calculate time to create a table. Please input the table name<br>
+   Table Name: <input type="text" name="name" maxlength="200" width="60"> 
+   <input type="submit" name='mode1' value="RDB Calculate">
+   <input type="submit" name='mode2' value="Memcache Calculate">
+  </form>
+  {% if create_elp %}
+  <h4>Create successful. Time eplased: {{create_elp}} second</h4>
+  {% endif %}
+  
+</p>
+<hr>
+<p>
+  <form action="{{ url_for('insert') }}" method="get">
+   Insert a piece of earth quake data into database:<br>
+   Time: <input type="text" name="time" maxlength="200" width="60"> 
+   Latitude: <input type="text" name="lat" maxlength="200" width="60"> 
+   Longitude: <input type="text" name="lon" maxlength="200" width="60"> 
+   Depth: <input type="text" name="dep" maxlength="200" width="60"> 
+   Mag: <input type="text" name="mag" maxlength="200" width="60"> 
+   Magtype: <input type="text" name="magtype" maxlength="200" width="60"> 
+   Nst: <input type="text" name="nst" maxlength="200" width="60"> 
+   Gap: <input type="text" name="gap" maxlength="200" width="60"> 
+   Dmin: <input type="text" name="dmin" maxlength="200" width="60"> 
+   RMS: <input type="text" name="rms" maxlength="200" width="60"> 
+   NET: <input type="text" name="net" maxlength="200" width="60"> 
+   ID: <input type="text" name="id" maxlength="200" width="60"> 
+   Updated: <input type="text" name="updated" maxlength="200" width="60"> 
+   Place: <input type="text" name="place" maxlength="200" width="60"> 
+   Type: <input type="text" name="type" maxlength="200" width="60"> 
+   HorizontalError: <input type="text" name="he" maxlength="200" width="60"> 
+   DepthError: <input type="text" name="de" maxlength="200" width="60"> 
+   MagError: <input type="text" name="me" maxlength="200" width="60"> 
+   Magnst: <input type="text" name="mn" maxlength="200" width="60"> 
+   Status: <input type="text" name="status" maxlength="200" width="60"> 
+   LocationSource: <input type="text" name="locsource" maxlength="200" width="60"> 
+   MagSource: <input type="text" name="magsource" maxlength="200" width="60"> 
+   <input type="submit" name='mode1' value="Insert to RDB">
+   <input type="submit" name='mode2' value="Insert to Memcache">
+  </form>
+  {% if insert_elp %}
+  <h4>Insert successful. Time eplased: {{insert_elp}} second</h4>
+  {% endif %}
+</p>
+<hr>
+<p>
+  <form action="{{ url_for('delete') }}" method="get">
+   Delete a piece of earth quake data from database:<br>
+   Time: <input type="text" name="time" maxlength="200" width="60"> 
+   Latitude: <input type="text" name="lat" maxlength="200" width="60"> 
+   Longitude: <input type="text" name="lon" maxlength="200" width="60"> 
+   Depth: <input type="text" name="dep" maxlength="200" width="60"> 
+   Mag: <input type="text" name="mag" maxlength="200" width="60"> 
+   Magtype: <input type="text" name="magtype" maxlength="200" width="60"> 
+   Nst: <input type="text" name="nst" maxlength="200" width="60"> 
+   Gap: <input type="text" name="gap" maxlength="200" width="60"> 
+   Dmin: <input type="text" name="dmin" maxlength="200" width="60"> 
+   RMS: <input type="text" name="rms" maxlength="200" width="60"> 
+   NET: <input type="text" name="net" maxlength="200" width="60"> 
+   ID: <input type="text" name="id" maxlength="200" width="60"> 
+   Updated: <input type="text" name="updated" maxlength="200" width="60"> 
+   Place: <input type="text" name="place" maxlength="200" width="60"> 
+   Type: <input type="text" name="type" maxlength="200" width="60"> 
+   HorizontalError: <input type="text" name="he" maxlength="200" width="60"> 
+   DepthError: <input type="text" name="de" maxlength="200" width="60"> 
+   MagError: <input type="text" name="me" maxlength="200" width="60"> 
+   Magnst: <input type="text" name="mn" maxlength="200" width="60"> 
+   Status: <input type="text" name="status" maxlength="200" width="60"> 
+   LocationSource: <input type="text" name="locsource" maxlength="200" width="60"> 
+   MagSource: <input type="text" name="magsource" maxlength="200" width="60"> 
+   <input type="submit" name='dmode1' value="Delete from RDB">
+   <input type="submit" name='dmode2' value="Delete from Memcache">
+  </form>
+  {% if delete_elp %}
+  <h4>Delete successful. Time eplased: {{delete_elp}} second</h4>
+  {% endif %}
+</p>
+<hr>
+<p>
+ <form action="/search_largest_n" method="get">
+  Largest n earthquake in the last 30 days. Please input n: <br>
+  N: <input type="text" name="number" maxlength="200" width="60">
+  <input type="submit" name='mode1' value="Search RDB">
+  <input type="submit" name='mode2' value="Search Memcache">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/search_around_place" method="get">
+  Quakes occurred within x kilometer of city y in the last 30 days. Please input distance and city: <br>
+  Distance: <input type="distance" name="" maxlength="200" width="60">
+  City: <input type="city" name="" maxlength="200" width="60">
+  <input type="submit" name='mode1' value="Search RDB">
+  <input type="submit" name='mode2' value="Search Memcache">
+</form>
+</p>
+<hr>
+<!-- <p>
+ <form action="/count_scale" method="get">
+  For the date range A through B, show how many quakes greater then Z on Richter scale. Please input A, B, Z.<br>
+  Start Date[YYYY-MM-DD]: <input type="text" name="start" maxlength="200" width="60"> 
+  End Date[YYYY-MM-DD]: <input type="text" name="end" maxlength="200" width="60"> 
+  Scale: <input type="text" name="scale" maxlength="200" width="60"> 
+  <input type="submit" value="Search RDB">
+  <input type="submit" value="Search Memcache">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/search_scale" method="get">
+  Show in most recent X days, how many quakes(Richter scale) happened of: 1-2, 2-3, 3-4, 4-5, 5-6, 6-7. Please input X: 
+  Most recent day X: <input type="text" name="number" maxlength="200" width="60"> 
+  <input type="submit" value="Search RDB">
+  <input type="submit" value="Search Memcache">
+</form>
+</p>
+<hr>
+<p>
+  <form action="/compare_two_place" method="get">
+    Show whether quakes common within X km of place A than place B in the last 30 days. Please input X, A, B: <br>
+    Distance: <input type="text" name="distance" maxlength="200" width="60"> 
+    Place A: <input type="text" name="placeA" maxlength="200" width="60">
+    Place B: <input type="text" name="placeB" maxlength="200" width="60">
+    <input type="submit" value="Search RDB">
+    <input type="submit" value="Search Memcache">
+  </form>
+</p>
+<hr>
+<p>
+  <form action="/largest_around_place" method="get">
+    Show where did largest quake occur within X km of Y city in the last 30 days. Please input X, Y: <br>
+    Distance: <input type="text" name="distance" maxlength="200" width="60"> 
+    City: <input type="text" name="city" maxlength="200" width="60"> 
+    <input type="submit" value="Search RDB">
+    <input type="submit" value="Search Memcache">
+</form>
+</p> -->
+
+{% endblock %}
