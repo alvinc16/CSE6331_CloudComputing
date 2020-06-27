@@ -1,0 +1,98 @@
+{# index page, providing a form to submit a city name #}
+{% extends "base.html" %}
+{% block title %}EarthQuake{% endblock %}
+{% block content %}
+<h1>1001778274, Zhu Zhengyuan</h1>
+<h2>Earthquake information retrieval system</h2>
+
+<hr>
+<p>
+  <form action="{{ url_for('show_prev') }}" method="get">
+    Allow a user, through a web form, to give a three letter country code, and for each year in the data set for that country
+    <br>
+   Country Code : <input type="text" name="code" maxlength="200" width="60"> 
+   <input type="submit" name='mode1' value="RDB Calculate">
+   <input type="submit" name='mode2' value="Memcache Calculate">
+  </form>
+  {% if create_elp %}
+  <h4>Create successful. Time eplased: {{create_elp}} second</h4>
+  {% endif %}
+</p>
+<hr>
+<p>
+  <form action="{{ url_for('show_cost') }}" method="get">
+    Allow a user, through a web form, to give either a three letter country code, or a country name, 
+    and for each year in the data sets for that country, please show the cost of cigarettes as well as 
+    the (smoking) prevalence (for all matching, show country name and code): <br>
+   Country Code: <input type="text" name="code" maxlength="200" width="60"> 
+   Country Name: <input type="text" name="name" maxlength="200" width="60"> 
+   The number of times to do this query: <input type="text" name="time" maxlength="200" width="60"> 
+   
+   <input type="submit" name='mode1' value="Query to RDB">
+   <input type="submit" name='mode2' value="Query to Memcache">
+  </form>
+  {% if insert_elp %}
+  <h4>Insert successful. Time eplased: {{insert_elp}} second</h4>
+  {% endif %}
+</p>
+<hr>
+<p>
+  <form action="{{ url_for('show_range') }}" method="get">
+   Allow a user, through a web form, to give a year range, and a cost range,  
+  please show the (smoking) prevalence and cost for all countries within that range, (and show country name and code): <br>
+   Year Range from: <input type="text" name="range0" maxlength="200" width="60"> 
+   Year Range to: <input type="text" name="range1" maxlength="200" width="60"> 
+   Cost Range from : <input type="text" name="cost0" maxlength="200" width="60"> 
+   Cost Range to : <input type="text" name="cost1" maxlength="200" width="60"> 
+   The number of times to do this query: <input type="text" name="time" maxlength="200" width="60"> 
+   
+   <input type="submit" name='mode1' value="Query to RDB">
+   <input type="submit" name='mode2' value="Query to Memcache">
+  </form>
+  {% if insert_elp %}
+  <h4>Insert successful. Time eplased: {{insert_elp}} second</h4>
+  {% endif %}
+</p>
+<hr>
+<!-- <p>
+ <form action="/count_scale" method="get">
+  For the date range A through B, show how many quakes greater then Z on Richter scale. Please input A, B, Z.<br>
+  Start Date[YYYY-MM-DD]: <input type="text" name="start" maxlength="200" width="60"> 
+  End Date[YYYY-MM-DD]: <input type="text" name="end" maxlength="200" width="60"> 
+  Scale: <input type="text" name="scale" maxlength="200" width="60"> 
+  <input type="submit" value="Search RDB">
+  <input type="submit" value="Search Memcache">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/search_scale" method="get">
+  Show in most recent X days, how many quakes(Richter scale) happened of: 1-2, 2-3, 3-4, 4-5, 5-6, 6-7. Please input X: 
+  Most recent day X: <input type="text" name="number" maxlength="200" width="60"> 
+  <input type="submit" value="Search RDB">
+  <input type="submit" value="Search Memcache">
+</form>
+</p>
+<hr>
+<p>
+  <form action="/compare_two_place" method="get">
+    Show whether quakes common within X km of place A than place B in the last 30 days. Please input X, A, B: <br>
+    Distance: <input type="text" name="distance" maxlength="200" width="60"> 
+    Place A: <input type="text" name="placeA" maxlength="200" width="60">
+    Place B: <input type="text" name="placeB" maxlength="200" width="60">
+    <input type="submit" value="Search RDB">
+    <input type="submit" value="Search Memcache">
+  </form>
+</p>
+<hr>
+<p>
+  <form action="/largest_around_place" method="get">
+    Show where did largest quake occur within X km of Y city in the last 30 days. Please input X, Y: <br>
+    Distance: <input type="text" name="distance" maxlength="200" width="60"> 
+    City: <input type="text" name="city" maxlength="200" width="60"> 
+    <input type="submit" value="Search RDB">
+    <input type="submit" value="Search Memcache">
+</form>
+</p> -->
+
+{% endblock %}
