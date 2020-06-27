@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Largest n Earthquake Information{% endblock %}
+{% block content %}
+
+<h1>1001778274, Zhu Zhengyuan</h1>
+<h2>Earthquake information retrieval system</h2>
+
+<h4>Earthquake Information</h4>
+<table border="1px">
+  <thead>
+    <th>TIME</th>
+    <th>LATITUDE</th>
+    <th>LONGTITUDE</th>
+    <th>DEPTH</th>
+    <th>MAG</th>
+    <th>GAP</th>
+    <th>ID</th>
+    <th>PLACE</th>
+    <th>LOCATIONSOURCE</th>
+  </thead>
+  <tbody>
+    {% for info in ci %}
+    <tr>
+      <td>{{info["TIME"]}}</td>
+      <td>{{info["LATITUDE"]}}</td>
+      <td>{{info["LONGTITUDE"]}}</td>
+      <td>{{info["DEPTH"]}}</td>
+      <td>{{info["MAG"]}}</td>
+      <td>{{info["GAP"]}}</td>
+      <td>{{info["ID"]}}</td>
+      <td>{{info["PLACE"]}}</td>
+      <td>{{info["LOCATIONSOURCE"]}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

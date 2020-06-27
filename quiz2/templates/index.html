@@ -1,0 +1,38 @@
+{# index page, providing a form to submit a city name #}
+{% extends "base.html" %}
+{% block title %}EarthQuake{% endblock %}
+{% block content %}
+<h1>1001778274, Zhu Zhengyuan</h1>
+<h2>Earthquake information retrieval system</h2>
+
+<p>
+  <form action="/search_largest_n" method="get">
+   Largest earthquake in the last 30 days. <br>
+   <input type="submit" value="Search">
+ </form>
+ </p>
+ <hr>
+<hr>
+<p>
+ <form action="/search_scale" method="get">
+  Please give two magnitude values A and B. Show the number of quakes between those values in N partitions. Please input A, B, N <br>
+  Lowerbound of magnitude value A: <input type="text" name="low_bound" maxlength="200" width="60"> 
+  Higherbound of magnitude value B: <input type="text" name="high_bound" maxlength="200" width="60"> 
+  Partition N: <input type="text" name="parition" maxlength="200" width="60"> 
+  <input type="submit" value="Search">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/search_around_place" method="get">
+  Allow a user to give two location values (lat and long for two different locations): (X1, Y1) and (X2, Y2). and on the page show (list) the id, lat, long, time, and place (name), for every earthquake in that area (box). <br>
+  Please input X1: <input type="text" name="X1" maxlength="200" width="60"> 
+  Please input Y1: <input type="text" name="Y1" maxlength="200" width="60"> 
+  Please input X2: <input type="text" name="X2" maxlength="200" width="60"> 
+  Please input Y2: <input type="text" name="Y2" maxlength="200" width="60"> 
+  <input type="submit" value="Search">
+</form>
+</p>
+
+
+{% endblock %}
