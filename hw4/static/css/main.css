@@ -51,7 +51,6 @@ rect:hover {
 }
 
 .legendFreq, .legendPerc{
-    align:right;
     width:50px;
 }
 
