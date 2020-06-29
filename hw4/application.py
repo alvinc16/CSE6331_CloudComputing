@@ -205,69 +205,6 @@ def search_scale():
                                                                                 "6-7": slot67})
 
 
-
-@app.route('/compare_two_place', methods=['GET'])
-def compare_two_place():
-    distance = request.args.get('distance', 1000, type=int)
-    
-    placeA, placeB = request.args.get('placeA'), request.args.get('placeB')
-    placeA = 'Anchorage' if placeA=='' else placeA
-    placeB = 'Dallas' if placeB=='' else placeB
-    
-    pA_json, pB_json = geocoder.osm(placeA).json, geocoder.osm(placeB).json
-    trgtA_coords, trgtB_coords = (pA_json['lat'], pA_json['lng']), (pB_json['lat'], pB_json['lng'])
-
-    # connect to DB2
-    db2conn = ibm_db.connect(db2cred['ssldsn'], "","")
-    if db2conn:
-        sql = "SELECT * FROM EARTHQUAKE"
-        stmt = ibm_db.exec_immediate(db2conn, sql)
-        ansA, ansB = [], []
-        # fetch the result
-        result = ibm_db.fetch_assoc(stmt)
-        while result != False:
-            curr_coords = (result['LATITUDE'], result['LONGTITUDE'])
-            if geopy.distance.vincenty(curr_coords, trgtA_coords).km<distance:
-                ansA.append(result.copy())
-            if geopy.distance.vincenty(curr_coords, trgtB_coords).km<distance:
-                ansB.append(result.copy())
-            result = ibm_db.fetch_assoc(stmt)
-        # close database connection
-        ibm_db.close(db2conn)
-    
-    return render_template('compare_two_place.html', ciA=ansA, ciB=ansB, pA=placeA, pB=placeB)
-
-
-
-@app.route('/largest_around_place', methods=['GET'])
-def largest_around_place():
-    distance = request.args.get('distance', 500, type=int)
-    city = request.args.get('city')
-    city = 'Dallas' if city=='' else city
-    usr_g_json = geocoder.osm(city).json
-    trgt_coords = (usr_g_json['lat'], usr_g_json['lng'])
-
-    # connect to DB2
-    db2conn = ibm_db.connect(db2cred['ssldsn'], "","")
-    if db2conn:
-        sql = "SELECT * FROM EARTHQUAKE"
-        stmt = ibm_db.exec_immediate(db2conn, sql)
-        ans, largest = [], 0
-        # fetch the result
-        result = ibm_db.fetch_assoc(stmt)
-        while result != False:
-            curr_coords = (result['LATITUDE'], result['LONGTITUDE'])
-            if geopy.distance.vincenty(curr_coords, trgt_coords).km<distance and float(result['MAG'])>largest:
-                largest = float(result['MAG'])
-                ans = [result.copy()]
-            result = ibm_db.fetch_assoc(stmt)
-        # close database connection
-        ibm_db.close(db2conn)
-    
-    return render_template('largest_around_place.html', ci=ans)
-
-
-
 port = os.getenv('PORT', '5001')
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=int(port))

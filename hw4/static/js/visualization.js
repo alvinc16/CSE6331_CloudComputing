@@ -115,8 +115,8 @@ function scatterChart(id, scatterData) {
             .data(scatter_data)
             .enter()
             .append("circle")
-            .attr("cx", function (d) {  console.log('aa', d.MAG); return x(d.MAG); } )
-            .attr("cy", function (d) {  console.log('bb', d.DEPTH); return y(d.DEPTH); } )
+            .attr("cx", function (d) { return x(d.MAG); } )
+            .attr("cy", function (d) { return y(d.DEPTH); } )
             .attr("r", 3)
             .style("fill", "#69b3a2")
     // text label for the x axis

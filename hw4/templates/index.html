@@ -41,24 +41,6 @@
   <input type="submit" value="Search">
 </form>
 </p>
-<hr>
-<p>
- <form action="/compare_two_place" method="get">
-   Show whether quakes common within X km of place A than place B in the last 30 days. Please input X, A, B: <br>
-   Distance: <input type="text" name="distance" maxlength="200" width="60"> 
-   Place A: <input type="text" name="placeA" maxlength="200" width="60">
-   Place B: <input type="text" name="placeB" maxlength="200" width="60">
-   <input type="submit" value="Search">
-</form>
-</p>
-<hr>
-<p>
- <form action="/largest_around_place" method="get">
-  Show where did largest quake occur within X km of Y city in the last 30 days. Please input X, Y: <br>
-  Distance: <input type="text" name="distance" maxlength="200" width="60"> 
-  City: <input type="text" name="city" maxlength="200" width="60"> 
-  <input type="submit" value="Search">
-</form>
 </p>
 
 {% endblock %}
