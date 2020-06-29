@@ -8,7 +8,6 @@ import geocoder
 import geopy.distance
 from config import *
 import time
-from cachetools import cached, Cache
 import pandas as pd
 
 app = Flask(__name__)
