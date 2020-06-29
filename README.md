@@ -2,9 +2,9 @@
 
 ## Demo Endpoint
 
-1. IBM Cloud: http://zzy824.us-south.cf.appdomain.cloud/
-2. Azure: http://zzy824-quake.azurewebsites.net
-3. Google App Engine: http://myresearch.uc.r.appspot.com/ **(deprecated)**
+1. [IBM Cloud](http://zzy824.us-south.cf.appdomain.cloud/)
+2. [Azure](http://zzy824-quake.azurewebsites.net)
+3. [Google App Engine](http://myresearch.uc.r.appspot.com/) **(deprecated)**
 
 ## Setup Environment
 
@@ -38,6 +38,7 @@ cd hw1 && google app deploy
 ```
 
 3. Microsoft Azure
+
 ``` sh
 git clone https://github.com/824zzy/CSE6331_CloudComputing.git
 # login your azure account through azure client
