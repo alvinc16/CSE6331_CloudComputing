@@ -133,6 +133,8 @@ def count_scale():
     start = datetime.datetime.strptime(start, "%Y-%m-%d")
     end = datetime.datetime.strptime(end, "%Y-%m-%d")
     scale = request.args.get('scale', '3')
+    slot01, slot12, slot23, slot34, slot45, slot56, slot67 = 0, 0, 0, 0, 0, 0, 0
+    scatter_attr = []
 
     # connect to DB2
     db2conn = ibm_db.connect(db2cred['ssldsn'], "","")
@@ -148,12 +150,34 @@ def count_scale():
             curr_date = result['TIME'][:10]
             curr_date = datetime.datetime.strptime(curr_date, "%Y-%m-%d")
             if start<=curr_date<=end:
+                mag_scale = float(result['MAG'])
+                if 0<=mag_scale<=1:
+                    slot01 += 1
+                if 1<=mag_scale<=2:
+                    slot12 += 1
+                if 2<=mag_scale<=3:
+                    slot23 += 1
+                if 3<=mag_scale<=4:
+                    slot34 += 1
+                if 4<=mag_scale<=5:
+                    slot45 += 1
+                if 5<=mag_scale<=6:
+                    slot56 += 1
+                if 6<=mag_scale<=7:
+                    slot67 += 1
+                scatter_attr.append({"MAG": float(result['MAG']), "DEPTH": float(result['DEPTH'])})
                 rows.append(result.copy())
             result = ibm_db.fetch_assoc(stmt)
     
         ibm_db.close(db2conn)
     
-    return render_template('count_scale.html', ci=rows)
+    return render_template('count_scale.html', rows=rows, sa=scatter_attr, ci={"0-1": slot01,
+                                                                               "1-2": slot12, 
+                                                                               "2-3": slot23, 
+                                                                               "3-4": slot34, 
+                                                                               "4-5": slot45, 
+                                                                               "5-6": slot56, 
+                                                                               "6-7": slot67})
 
 @app.route('/search_scale', methods=['GET'])
 def search_scale():

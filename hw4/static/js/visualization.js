@@ -12,19 +12,16 @@ function worldMap(quakeData){
     var path = d3.geoPath().projection(projection);
 
     var url = "http://enjalot.github.io/wwsd/data/world/world-110m.geojson";
-    var data_url = "http://enjalot.github.io/wwsd/data/world/ne_50m_populated_places_simple.geojson";
 
-    Promise.all([d3.json(url), d3.json(data_url)]).then(function(data) {
-        var world = data[0];
-        var places = data[1];
-        var encodedStr = quakeData;
-        var parser = new DOMParser;
+    d3.json(url).then(function(data) {
+        var world = data
+        var encodedStr = quakeData
+        var parser = new DOMParser
         var dom = parser.parseFromString(
             '<!doctype html><body>' + encodedStr,
             'text/html');
         var decodedString = dom.body.textContent.replace(/'/g, '"')
         var quakes = JSON.parse(decodedString)
-
         
         svg.append("path")
         .attr("d", path(world))
@@ -137,9 +134,7 @@ function scatterChart(id, scatterData) {
 
 }
 
-function dashboard(id, quakeScale, quakeData) {
-    var wrd = worldMap(quakeData);
-    
+function dashboard(id, quakeScale, quakeData) {    
     var barColor = 'steelblue';
     function segColor(c){ 
         return { "0-1":"#807dba", 
@@ -329,7 +324,8 @@ function dashboard(id, quakeScale, quakeData) {
     legArr = Object.keys(quakeScale).map(function(k) {
     return {'type': k, 'freq': quakeScale[k]}
     })
-    var hG = histoGram(hisArr), // create the histogram.
-        pC = pieChart(pieArr), // create the pie-chart.
-        leg= legend(legArr);  // create the legend.       
+    worldMap(quakeData); //// create the world map
+    histoGram(hisArr) // create the histogram.
+    pieChart(pieArr) // create the pie-chart.
+    legend(legArr)  // create the legend.       
 }
