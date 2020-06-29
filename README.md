@@ -46,12 +46,12 @@ cd hw1 && az webapp up --sku F1 -n [your app name]
 
 ## Screen Shots
 
-- [Homework 1: Upload Files and Display Data]('./hw1/README.md')
-- [Homework 2: Connect to Database and Fancy Query]('./hw2/README.md')
-- [Homework 3: Accelerate IDSU[insert/delete/select/update] by Memcache]('./hw3/README.md')
-- [Homework 4: Visualization by D3.js]('./hw4/README.md')
-- [Homework 5: TODO:]('./hw5/README.md')
-- [Homework 6: TODO:]('./hw6/README.md')
+- [Homework 1: Upload Files and Display Data]('hw1/README.md')
+- [Homework 2: Connect to Database and Fancy Query]('hw2/README.md')
+- [Homework 3: Accelerate IDSU[insert/delete/select/update] by Memcache]('hw3/README.md')
+- [Homework 4: Visualization by D3.js]('hw4/README.md')
+- [Homework 5: TODO:]('hw5/README.md')
+- [Homework 6: TODO:]('hw6/README.md')
 
 ## About Author
 
