@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Largest n Earthquake Information{% endblock %}
+{% block content %}
+
+<h1>1001778274, Zhu Zhengyuan</h1>
+<h2>Earthquake information retrieval system</h2>
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<!-- <script type="text/javascript" src="https://mbostock.github.com/d3/d3.js?2.1.3"></script> -->
+<h3> Bar and Pie Chart by Scales</h3>
+<div id='dashboard'></div>
+<script>
+  var encodedStr = '{{ci}}';
+  var parser = new DOMParser;
+  var dom = parser.parseFromString(
+      '<!doctype html><body>' + encodedStr,
+      'text/html');
+  var decodedString = dom.body.textContent.replace(/'/g, '"')
+  var scaledQuake = JSON.parse(decodedString)
+
+  // dashboard('#dashboard',freqData);
+  dashboard('#dashboard', scaledQuake);
+
+
+
+  
+</script>
+
+
+{% endblock %}

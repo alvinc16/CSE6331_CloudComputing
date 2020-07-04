@@ -1,0 +1,54 @@
+{# index page, providing a form to submit a city name #}
+{% extends "base.html" %}
+{% block title %}EarthQuake{% endblock %}
+{% block content %}
+<h1>1001778274, Zhu Zhengyuan</h1>
+<h2>Earthquake information retrieval system</h2>
+
+<hr>
+
+<p>
+ <form action="/search_largest_n" method="get">
+  Allow a user, through a web form, to give a "partion" value (called N), and a year value, where you will display N bars
+    for the population divided into N parts of equal size. For example if N is equal to 4, and the largest state population 
+    is California, with almost 40 million people, you will have 40 million (you can round to nearest 100 thousand) divided
+    by 4, that is population up to 10 million, 10 to 20 million, up to 30 to 40 million. 
+    Display in a horizontal bar chart on that page, which is at least 3/4 (75%) the width of the screen. 
+    Each bar should be in a different color, please show labels to the right of each bar. <br>
+  Partition: <input type="text" name="partition" maxlength="200" width="60">
+  Year: <input type="text" name="year" maxlength="200" width="60">
+  <input type="submit" value="Search">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/search_around_place" method="get">
+  Similar to the previous question, please show a page, followed by a pie chart on that page, 
+    where the user, through a web form, will give a population range (in 100 thousands) for example
+    (from 30 to 40, that is population from 3 million to 4 million), and a year value, and     
+    show a pie chart on that page, which is at most half (50%) the width of the screen (40 to 50 %), 
+    which shows the percentage of each state within that range (there are 6 states in 2018, 
+    within that range, so the pie should have 6 slices.)
+    Each pie slice should be in a different color, please show labels inside each slice.
+ <br>
+  Population Range From: <input type="text" name="start" maxlength="200" width="60">
+  Population Range To: <input type="text" name="end" maxlength="200" width="60">
+  Year: <input type="text" name="year" maxlength="200" width="60">
+  <input type="submit" value="Search">
+</form>
+</p>
+<hr>
+<p>
+ <form action="/search_scale" method="get">
+  Allow a user, through a web form, to give a year range (for example 2008 to 2015, where either value may not be in the data set),
+  and a state name, and show a scatter diagram (point diagram, point chart) where the year is the X axis and the population
+  is on the Y axis. Scale, the chart to make sense.
+  Year Range From: <input type="text" name="start" maxlength="200" width="60"> 
+  Year Range To: <input type="text" name="end" maxlength="200" width="60"> 
+  State name: <input type="text" name="state" maxlength="200" width="60"> 
+  <input type="submit" value="Search">
+</form>
+</p>
+</p>
+
+{% endblock %}
