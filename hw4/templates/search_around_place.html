@@ -19,6 +19,7 @@
       'text/html');
   var decodedString = dom.body.textContent.replace(/'/g, '"')
   var scaledQuake = JSON.parse(decodedString)
+  
   dashboard('#dashboard', scaledQuake, '{{rows}}');
   scatterChart('#scatter', '{{sa}}')
 </script>
