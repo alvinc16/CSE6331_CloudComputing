@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Largest n Earthquake Information{% endblock %}
+{% block content %}
+
+<table border="1px">
+  {% if ci %}
+  <thead>
+    <th>Word</th>
+    <th>Frequency</th>
+  </thead>
+  <tbody>
+    {% for info in ci %}
+    <tr>
+      <td>{{info[0]}}</td>
+      <td>{{info[1]}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% endif %}
+  {% if di %}
+  <thead>
+    <th>Sentence</th>
+  </thead>
+  <tbody>
+    {% for info in di %}
+    <tr>
+      <td>{{info}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% endif %}
+</table>
+{% endblock %}
