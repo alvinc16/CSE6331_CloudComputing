@@ -80,19 +80,19 @@ def search_people_by_grade():
 
 
 
-@app.route("/people_by_room", methods=['POST'])
-def search_people_by_room():
-    room_number = int(float(request.form['room_number']))
+@app.route("/people_by_height", methods=['POST'])
+def search_people_by_height():
+    height_number = int(float(request.form['height_number']))
     # print('daad', room_number, type(room_number))
     df = pd.read_csv(curr_file, engine='python')
     resp = []
     for _, line in df.iterrows():
-        if not math.isnan(line[2]):
-            if int(line[2])==int(room_number):
-                if isinstance(line[4], str):
-                    resp.append([line[0], './files/'+line[4]])
+        if not math.isnan(line[1]):
+            if int(line[1])==int(height_number):
+                if isinstance(line[3], str):
+                    resp.append([line[0], './files/'+line[3]])
                     
-    return render_template("people_by_room.html", people=resp)
+    return render_template("people_by_height.html", people=resp)
 
 
 

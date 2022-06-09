@@ -6,7 +6,6 @@
 </head>
 
 <body>
-    <h1 align='center'>Zhengyuan Zhu, 1001778274</h1>
     <h1 align='center'>Flask - Information Retrieval System: View File</h1>
     <h2><a href="{{ url_for('index') }}"><- Home</a></h2>
     <h3 align='center'> The information of your csv file </h3>
@@ -14,9 +13,8 @@
     <table align='center'>
         <thead>
             <th>Name</th>
-            <th>Grade</th>
-            <th>Room</th>
-            <th>State</th>
+            <th>Height</th>
+            <th>Author</th>
             <th>Picture</th>
             <th>Keywords</th>
         </thead>
@@ -37,22 +35,22 @@
     </table>
 
     <h2> Search </h2>
-    <h3> Search by Room Number </h3>
-    <form action="{{ url_for('search_people_by_room')}}" method="POST">
-        <p>Search people whose room number is </p>
-        <textarea name="room_number" rows="1" cols="10"></textarea>
+    <h3> Search by Height </h3>
+    <form action="{{ url_for('search_people_by_height')}}" method="POST">
+        <p>Search people whose height is </p>
+        <textarea name="height_number" rows="1" cols="10"></textarea>
         <br/>
-        <input type="submit" class="btn-info" value="search people by room number">
+        <input type="submit" class="btn-info" value="search people by height">
     </form>
-    <h3> Search people grade</h3>
-    <form action="{{ url_for('search_people_by_grade')}}" method="POST">
-        <p>Grade lower bound</p>
-        <textarea name="low_grade" rows="1" cols="10"></textarea>
-        <p>Grade higher bound</p>
-        <textarea name="high_grade" rows="1" cols="10"></textarea>
-        <br/>
-        <input type="submit" class="btn-info" value="search people by grade">
-    </form>
+{#    <h3> Search people grade</h3>#}
+{#    <form action="{{ url_for('search_people_by_grade')}}" method="POST">#}
+{#        <p>Grade lower bound</p>#}
+{#        <textarea name="low_grade" rows="1" cols="10"></textarea>#}
+{#        <p>Grade higher bound</p>#}
+{#        <textarea name="high_grade" rows="1" cols="10"></textarea>#}
+{#        <br/>#}
+{#        <input type="submit" class="btn-info" value="search people by grade">#}
+{#    </form>#}
     <hr>
     <h2> Change </h2>
     <h3> Change people information </h3>
