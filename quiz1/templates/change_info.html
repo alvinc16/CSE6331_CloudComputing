@@ -4,7 +4,7 @@
 	<title></title>
 </head>
 <body>
-	<h1 align='center'>Zhengyuan Zhu, 1001778274</h1>
+	<h1 align='center'>QCloud, Wenkang Feng, 1001989816</h1>
 	<p style="color:blue;font-size:20;text-align: center;"><b>Results of your change value operation</b></p>
 	{% if img_url %}
 	<p align='center'><img src="{{ img_url }}"></p>
@@ -16,11 +16,9 @@
 	<table align='center'>
 		<thead>
 			<th>Name</th>
-			<th>Salary</th>
-			<th>Room</th>
-			<th>Telnum</th>
+			<th>Num</th>
 			<th>Picture</th>
-			<th>Caption</th>
+			<th>Keywords</th>
 		</thead>
 		<tbody>
 			{% if info %}
@@ -28,10 +26,8 @@
 			<tr>
 				<td>{{ i[0] }}</td>
 				<td>{{ i[1] }}</td>
-				<td>{{ i[2] }}</td>
+				<td><img src="../files/{{ i[2] }}" width="100" /></td>
 				<td>{{ i[3] }}</td>
-				<td>{{ i[4] }}</td>
-				<td>{{ i[5] }}</td>
 			</tr>
 			{% endfor %}
 			{% endif %}

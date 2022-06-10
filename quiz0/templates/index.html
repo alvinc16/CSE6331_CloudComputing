@@ -6,19 +6,16 @@
 	<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}"> -->
 </head>
 <body>
-	<h1 align='center'>Flask - Information Retrieval System</h1>
-	<h2>Select csv/image files to upload:</h2>
-	<form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
-		<input type="file" name="file" id="fileToUpload"> 
-		<br><br>
-		<input type="submit" value="Upload File" name="submit">
-	</form>
-
+	<h1 align='center'>Wenkang Feng 1001989816</h1>
+{#	<h2>Select csv/image files to upload:</h2>#}
+{#	<form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">#}
+{#		<input type="file" name="file" id="fileToUpload"> #}
+{#		<br><br>#}
+{#		<input type="submit" value="Upload File" name="submit">#}
+{#	</form>#}
 	<hr>
 
-	<h2>List of files available on the storage:</h2>
-	<h3>You can view and operate by click csv file</h3>
-
+    <img src="../files/curly.png" style="width: 300px">
 	<table>
 		<thead>
 			<th>CSV Name</th>
@@ -37,12 +34,14 @@
 	<table>
 		<thead>
 			<th>Other File Name</th>
+            <th>Picture</th>
 			<th>Other File Size</th>
 		</thead>
 		<tbody>
 			{% for obj in other_obj %}
 			<tr>
 				<td><a href="{{ url_for('view', object_name=obj.name) }}">{{ obj.name }}</a></td>
+                <td><img src="../files/{{ obj.name }}" width="50" /></td>
 				<td>{{ obj.size }} bytes</td>
 			</tr>
 			{% endfor %}

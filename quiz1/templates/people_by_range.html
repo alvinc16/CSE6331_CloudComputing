@@ -18,8 +18,10 @@
 	<h3>no picture available</h3>
 	{% endif %}
 	{% for p in people %}
-	<h3>you find {{ p[0] }}</h3>
-    <img src="{{ p[1] }}">
+	    <h3>name {{ p[0] }}</h3>
+        <h3>num {{ p[1] }}</h3>
+        <img src="{{ p[2] }}">
+        <h3>keyword {{ p[3] }}</h3>
 	{% endfor %}
 </body>
 </html>

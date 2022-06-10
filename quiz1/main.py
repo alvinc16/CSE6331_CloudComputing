@@ -78,17 +78,31 @@ def search_people_by_id():
     return render_template("people_by_id.html", grade_resp=resp)
 
 
+@app.route("/people_by_range", methods=['POST'])
+def search_people_by_range():
+    low = request.form['low_num']
+    high = request.form['high_num']
+    df = pd.read_csv(curr_file, engine='python')
+    resp = []
+    for _, line in df.iterrows():
+        if line[1] != ' ' and not math.isnan(float(line[1])):
+            if int(low) <= int(line[1]) <= int(high):
+                if isinstance(line[2], str):
+                    print(line[0])
+                    resp.append([line[0], line[1], '../files/' + line[2], line[3]])
+    return render_template("people_by_range.html", people=resp)
 
-@app.route("/people_by_img", methods=['POST'])
-def search_people_by_img():
-    img_name = request.form['img_name'].split('.')[0]
+@app.route("/people_by_name", methods=['POST'])
+def search_people_by_name():
+    img_name = request.form['img_name']
     print('zzz', img_name)
     df = pd.read_csv(curr_file, engine='python')
     resp = []
     for _, line in df.iterrows():
-        if line[4] and isinstance(line[4], str):
-            if line[4]==img_name or line[4].split('.')[0]==img_name:
-                resp.append([line[0], './files/'+line[4]])
+        print('zzz', line[0])
+        if line[0] and isinstance(line[0], str):
+            if line[0]==img_name:
+                resp.append([line[0], '../files/' + line[2]])
                     
     return render_template("people_by_img.html", people=resp)
 
@@ -98,9 +112,16 @@ def search_people_by_img():
 def change_people_info():
     ppl = request.form['change_people']
     val = request.form['target_value']
-    
+    pic = request.form['picture_value']
+    print(val)
     df = pd.read_csv(curr_file, engine='python')
-    df.at[df['Name']==ppl, 'Caption'] = val
+
+    for index, line in df.iterrows():
+        if line[0] == ppl:
+            if val != '':
+                df['Keywords'][index] = val
+            if pic != '':
+                df['Picture'][index] = pic
     info = df.values.tolist()
     df.to_csv(curr_file, index=False)
     try:
@@ -108,6 +129,34 @@ def change_people_info():
     except:
         img_url = ''
     
+    return render_template("change_info.html", info=info, img_url=img_url)
+
+
+@app.route("/add_info", methods=['POST'])
+def add_people_info():
+    name = request.form['name']
+    num = request.form['num']
+    key = request.form['key']
+    df = pd.read_csv(curr_file, engine='python')
+    df.loc[1] = [name, num, '../files/a.jpg', key]
+    info = df.values.tolist()
+    df.to_csv(curr_file, index=False)
+    img_url = ''
+
+    return render_template("change_info.html", info=info, img_url=img_url)
+
+@app.route("/rm_info", methods=['POST'])
+def rm_people_info():
+    name = request.form['name']
+    df = pd.read_csv(curr_file, engine='python')
+    for index, line in df.iterrows():
+        if line[0] == name:
+            print(index)
+            df.drop(index=index)
+    info = df.values.tolist()
+    df.to_csv(curr_file, index=False)
+    img_url = ''
+
     return render_template("change_info.html", info=info, img_url=img_url)
 
 

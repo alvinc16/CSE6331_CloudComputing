@@ -6,51 +6,53 @@
 </head>
 
 <body>
-    <h1 align='center'>Zhengyuan Zhu, 1001778274</h1>
-    <h1 align='center'>Flask - Information Retrieval System: View File</h1>
+    <h1 align='center'>QCloud, Wenkang Feng, 1001989816</h1>
+{#    <h1 align='center'>Flask - Information Retrieval System: View File</h1>#}
     <h2><a href="{{ url_for('index') }}"><- Home</a></h2>
     <h3 align='center'> The information of your csv file </h3>
     <br>
     <table align='center'>
         <thead>
             <th>Name</th>
-            <th>ID</th>
-            <th>Room</th>
-            <th>State</th>
-            <th>Picture</th>
-            <th>Caption</th>
+			<th>Num</th>
+			<th>Picture</th>
+			<th>Keywords</th>
         </thead>
         <tbody>
             {% if info %}
-            {% for i in info %}
-            <tr>
-                <td>{{ i[0] }}</td>
-                <td>{{ i[1] }}</td>
-                <td>{{ i[2] }}</td>
-                <td>{{ i[3] }}</td>
-                <td>{{ i[4] }}</td>
-                <td>{{ i[5] }}</td>
-            </tr>
-            {% endfor %}
-            {% endif %}
+			{% for i in info %}
+			<tr>
+				<td>{{ i[0] }}</td>
+				<td>{{ i[1] }}</td>
+				<td><img src="../files/{{ i[2] }}" width="100" /></td>
+				<td>{{ i[3] }}</td>
+			</tr>
+			{% endfor %}
+			{% endif %}
         </tbody>
     </table>
 
     <h2> Search </h2>
-    <h3> Search by Image </h3>
-    <form action="{{ url_for('search_people_by_img')}}" method="POST">
-        <p>Search people whose img name is </p>
+    <h3> Search by name </h3>
+    <form action="{{ url_for('search_people_by_name')}}" method="POST">
+{#        <p>Search people whose name is </p>#}
         <textarea name="img_name" rows="1" cols="10"></textarea>
         <br/>
-        <input type="submit" class="btn-info" value="search people by img name">
+        <input type="submit" class="btn-info" value="search people by name">
     </form>
-    <h3> Search people by ID</h3>
-    <form action="{{ url_for('search_people_by_id')}}" method="POST">
-        <p>Student ID</p>
-        <textarea name="stu_id" rows="1" cols="10"></textarea>
+
+
+    <h3> Search people by range</h3>
+    <form action="{{ url_for('search_people_by_range')}}" method="POST">
+{#        <p>Student ID</p>#}
+{#        <textarea name="stu_id" rows="1" cols="10"></textarea>#}
+        <textarea name="low_num" rows="1" cols="10"></textarea>
+        <textarea name="high_num" rows="1" cols="10"></textarea>
+{#        <textarea name="range2" rows="2" cols="10"></textarea>#}
         <br/>
-        <input type="submit" class="btn-info" value="search people by id">
+        <input type="submit" class="btn-info" value="search by num range">
     </form>
+
     <hr>
     <h2> Change </h2>
     <h3> Change people information </h3>
@@ -58,8 +60,31 @@
             <p>Who you want to change</p>
             <textarea name="change_people" rows="1" cols="10"></textarea>
             <br/>
+            <p>The Picture you want</p>
+            <textarea name="picture_value" rows="1" cols="10"></textarea>
+            <br/>
             <p>The key word value you want</p>
             <textarea name="target_value" rows="1" cols="10"></textarea>
+            <br/>
+            <input type="submit" class="btn-info" value="apply change">
+        </form>
+    <h2> Add </h2>
+        <form action="{{ url_for('add_people_info')}}" method="POST">
+            <p>Name</p>
+            <textarea name="name" rows="1" cols="10"></textarea>
+            <br/>
+            <p>Num</p>
+            <textarea name="num" rows="1" cols="10"></textarea>
+            <br/>
+            <p>Keyword</p>
+            <textarea name="key" rows="1" cols="10"></textarea>
+            <br/>
+            <input type="submit" class="btn-info" value="apply change">
+        </form>
+    <h2> Remove </h2>
+        <form action="{{ url_for('rm_people_info')}}" method="POST">
+            <p>Name</p>
+            <textarea name="name" rows="1" cols="10"></textarea>
             <br/>
             <input type="submit" class="btn-info" value="apply change">
         </form>
