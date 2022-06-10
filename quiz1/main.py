@@ -5,7 +5,7 @@ from flask_cloudy import Storage
 import pandas as pd
 import math
 
-port = int(os.getenv('PORT', 8000))
+port = int(os.getenv('PORT', 5000))
 curr_file = None
 
 app = Flask(__name__)
