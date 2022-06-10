@@ -152,7 +152,7 @@ def rm_people_info():
     for index, line in df.iterrows():
         if line[0] == name:
             print(index)
-            df.drop(index=index)
+            df.drop(index=index,inplace=True)
     info = df.values.tolist()
     df.to_csv(curr_file, index=False)
     img_url = ''
