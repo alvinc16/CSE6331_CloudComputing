@@ -1,6 +1,7 @@
 import os
 from flask import Flask,redirect,render_template,request
 import urllib
+import pymysql
 import datetime
 import json
 import ibm_db
@@ -9,6 +10,11 @@ import geopy.distance
 from config import *
 
 app = Flask(__name__)
+
+DBHOST = 'localhost'
+DBUSER = 'root'
+DBPASS = '19980604'
+DBNAME = 'EARTHQUAKE'
 
 if 'VCAP_SERVICES' in os.environ:
     db2info = json.loads(os.environ['VCAP_SERVICES'])['dashDB For Transactions'][0]
@@ -63,25 +69,88 @@ def search_around_place():
     Y1 = float(request.args.get('Y1'))
     X2 = float(request.args.get('X2'))
     Y2 = float(request.args.get('Y2'))
-    
-
-    db2conn = ibm_db.connect(db2cred['ssldsn'], "","")
-    if db2conn:
-        sql = "SELECT * FROM EARTHQUAKE"
-        stmt = ibm_db.exec_immediate(db2conn, sql)
-        rows=[]
-        result = ibm_db.fetch_assoc(stmt)
-        while result != False:
-            curr_x = float(result['LATITUDE'])
-            curr_y = float(result['LONGTITUDE'])
-            
-            if X1<curr_x<X2 or X2<curr_x<X1:
-                if Y1<curr_y<Y2 or Y2<curr_y<Y1:
-                    rows.append(result.copy())
-            result = ibm_db.fetch_assoc(stmt)
-        
-        ibm_db.close(db2conn)
+    print(X1,X2,Y1,Y2)
+    try:
+        db = pymysql.connect(host=DBHOST, user=DBUSER, password=DBPASS, database=DBNAME)
+        print('数据库连接成功!')
+    except pymysql.Error as e:
+        print('数据库连接失败' + str(e))
+    print(X1, X2, Y1, Y2)
+    sql = "SELECT * FROM earthquake"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    rows=[]
+    for result in results:
+        print(result)
+        curr_x = float(result[1])
+        curr_y = float(result[2])
+        if X1<curr_x<X2 or X2<curr_x<X1:
+            if Y1<curr_y<Y2 or Y2<curr_y<Y1:
+                rows.append(result.copy())
+    db.close()
     return render_template('search_around_place.html', ci=rows)
+
+
+@app.route('/search_around_place_by_nn', methods=['GET'])
+def search_around_place_by_nn():
+    nn = str(request.args.get('nn'))
+    magnitude1 = str(request.args.get('magnitude1'))
+    magnitude2 = str(request.args.get('magnitude2'))
+    try:
+        db = pymysql.connect(host=DBHOST, user=DBUSER, password=DBPASS, database=DBNAME)
+        print('数据库连接成功!')
+    except pymysql.Error as e:
+        print('数据库连接失败' + str(e))
+    sql = "SELECT * FROM earthquake WHERE net = " + nn + "and mag <" + magnitude1 + " and mag >" + magnitude2 + " order by mag limit 5"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    rows = []
+
+    for result in results:
+        rows.append(result.copy())
+    db.close()
+    return render_template('search_around_place.html', ci=rows)
+
+@app.route('/search_around_place_by_day', methods=['GET'])
+def search_around_place_by_day():
+    Z1 = float(request.args.get('Z1'))
+    Z2 = float(request.args.get('Z2'))
+    try:
+        db = pymysql.connect(host=DBHOST, user=DBUSER, password=DBPASS, database=DBNAME)
+        print('数据库连接成功!')
+    except pymysql.Error as e:
+        print('数据库连接失败' + str(e))
+
+    sql = "SELECT * FROM earthquake WHERE time <"+Z1+"and time >"+Z2
+    cursor = db.cursor()
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    rows = []
+    for result in results:
+        rows.append(result.copy())
+    db.close()
+    return render_template('search_around_place.html', ci=rows)
+
+@app.route('/update_nn_2_rl', methods=['GET'])
+def update_nn_2_rl():
+    nn = float(request.args.get('nn'))
+    rl = float(request.args.get('rl'))
+    try:
+        db = pymysql.connect(host=DBHOST, user=DBUSER, password=DBPASS, database=DBNAME)
+        print('数据库连接成功!')
+    except pymysql.Error as e:
+        print('数据库连接失败' + str(e))
+    sql = "UPDATE earthquake SET net = " + rl + "WHERE net = " + nn
+    cursor = db.cursor()
+    cursor.execute(sql)
+    sql = "SEARCH * FROM earthquake limit 100"
+    cursor = db.cursor()
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    db.close()
+    return render_template('search_around_place.html', ci=results)
 
 
 
@@ -218,6 +287,6 @@ def largest_around_place():
 
 
 
-port = os.getenv('PORT', '5000')
+port = os.getenv('PORT', '8080')
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=int(port))

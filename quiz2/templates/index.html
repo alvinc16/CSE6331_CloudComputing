@@ -2,26 +2,25 @@
 {% extends "base.html" %}
 {% block title %}EarthQuake{% endblock %}
 {% block content %}
-<h1>1001778274, Zhu Zhengyuan</h1>
-<h2>Earthquake information retrieval system</h2>
+<h1 align='center'>QCloud, Wenkang Feng, 1001989816</h1>
 
-<p>
-  <form action="/search_largest_n" method="get">
-   Largest earthquake in the last 30 days. <br>
-   <input type="submit" value="Search">
- </form>
- </p>
- <hr>
+{#<p>#}
+{#  <form action="/search_largest_n" method="get">#}
+{#   Largest earthquake in the last 30 days. <br>#}
+{#   <input type="submit" value="Search">#}
+{# </form>#}
+{# </p>#}
+{# <hr>#}
 <hr>
-<p>
- <form action="/search_scale" method="get">
-  Please give two magnitude values A and B. Show the number of quakes between those values in N partitions. Please input A, B, N <br>
-  Lowerbound of magnitude value A: <input type="text" name="low_bound" maxlength="200" width="60"> 
-  Higherbound of magnitude value B: <input type="text" name="high_bound" maxlength="200" width="60"> 
-  Partition N: <input type="text" name="parition" maxlength="200" width="60"> 
-  <input type="submit" value="Search">
-</form>
-</p>
+{#<p>#}
+{# <form action="/search_scale" method="get">#}
+{#  Please give two magnitude values A and B. Show the number of quakes between those values in N partitions. Please input A, B, N <br>#}
+{#  Lowerbound of magnitude value A: <input type="text" name="low_bound" maxlength="200" width="60"> #}
+{#  Higherbound of magnitude value B: <input type="text" name="high_bound" maxlength="200" width="60"> #}
+{#  Partition N: <input type="text" name="parition" maxlength="200" width="60"> #}
+{#  <input type="submit" value="Search">#}
+{#</form>#}
+{#</p>#}
 <hr>
 <p>
  <form action="/search_around_place" method="get">
@@ -30,6 +29,33 @@
   Please input Y1: <input type="text" name="Y1" maxlength="200" width="60"> 
   Please input X2: <input type="text" name="X2" maxlength="200" width="60"> 
   Please input Y2: <input type="text" name="Y2" maxlength="200" width="60"> 
+  <input type="submit" value="Search">
+</form>
+</p>
+    <p>
+ <form action="/search_around_place_by_nn" method="get">
+  For a value "net" (such as  "nn") and a magnitude range (for example 2.5 to 2.6), show the largest 5 magnitude quakes
+     in that "net" within the specified magnitude range. Please show same details as previous question.<br>
+  Please input nn: <input type="text" name="nn" maxlength="200" width="60">
+  Please input magnitude1: <input type="text" name="magnitude1" maxlength="200" width="60">
+  Please input magnitude2: <input type="text" name="magnitude2" maxlength="200" width="60">
+  <input type="submit" value="Search">
+</form>
+</p>
+        <p>
+ <form action="/search_around_place_by_day" method="get">
+  For one single given day, given in Z time, (for example 6-15) show the net value that occurs most frequently and the one that
+     occurs least frequently (but at least once.) <br>
+  Please input time1: <input type="text" name="Z1" maxlength="200" width="60">
+  Please input time2: <input type="text" name="Z2" maxlength="200" width="60">
+  <input type="submit" value="Search">
+</form>
+</p>
+            <p>
+ <form action="/update_nn_2_rl" method="get">
+  Allow a user to give a first net value (such as "nn") and replacement net value (such as "rl") and replace all "nn" values with "rl", <br>
+  Please input net value to replaced: <input type="text" name="nn" maxlength="200" width="60">
+  Please input net value to set: <input type="text" name="rl" maxlength="200" width="60">
   <input type="submit" value="Search">
 </form>
 </p>
