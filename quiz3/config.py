@@ -15,7 +15,7 @@ os.environ['VCAP_SERVICES'] = """{
       "role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager"
      },
      "password": "0q2bqjtqq21lf@97",
-     "port": 50000,
+     "port": 8080,
      "ssldsn": "DATABASE=BLUDB;HOSTNAME=dashdb-txn-sbox-yp-dal09-10.services.dal.bluemix.net;PORT=50001;PROTOCOL=TCPIP;UID=xlq47970;PWD=0q2bqjtqq21lf@97;Security=SSL;",
      "ssljdbcurl": "jdbc:db2://dashdb-txn-sbox-yp-dal09-10.services.dal.bluemix.net:50001/BLUDB:sslConnection=true;",
      "uri": "db2://xlq47970:0q2bqjtqq21lf%4097@dashdb-txn-sbox-yp-dal09-10.services.dal.bluemix.net:50000/BLUDB",

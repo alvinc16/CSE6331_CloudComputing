@@ -4,8 +4,19 @@
 
 <h1 align='center'>QCloud, Wenkang Feng, 1001989816</h1>
 
-<h4>the minimum elevations = {{min}}</h4>
-<h4>the maximum elevations = {{max}}</h4>
+<h4>Time</h4>
+    <table border="1px">
+  <thead>
+    <th>Times</th>
+  </thead>
+  <tbody>
+    {% for info in times %}
+    <tr>
+      <td>{{info}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 <h4>Earthquake Information</h4>
 
 <table border="1px">
@@ -20,6 +31,31 @@
   </thead>
   <tbody>
     {% for info in ci %}
+    <tr>
+      <td>{{info[0]}}</td>
+      <td>{{info[1]}}</td>
+      <td>{{info[2]}}</td>
+      <td>{{info[3]}}</td>
+      <td>{{info[4]}}</td>
+      <td>{{info[5]}}</td>
+      <td>{{info[6]}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<table border="1px">
+  <thead>
+    <th>Number</th>
+    <th>Volcano Name</th>
+    <th>Country</th>
+    <th>Region</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Elev</th>
+  </thead>
+  <tbody>
+    {% for info in row %}
     <tr>
       <td>{{info[0]}}</td>
       <td>{{info[1]}}</td>

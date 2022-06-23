@@ -2,29 +2,18 @@
 {% block title %}Largest n Earthquake Information{% endblock %}
 {% block content %}
 
-<h1>1001778274, Zhu Zhengyuan</h1>
-<h2>Earthquake information retrieval system</h2>
-<h4>Time elapsed: {{elapse}} second</h4>
+<h1 align='center'>QCloud, Wenkang Feng, 1001989816</h1>
 
-<h4>Earthquake Information</h4>
-<table border="1px">
-  <thead>
-    <th>1-2</th>
-    <th>2-3</th>
-    <th>3-4</th>
-    <th>4-5</th>
-    <th>5-6</th>
-    <th>6-7</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{ci[0]}}</td>
-      <td>{{ci[1]}}</td>
-      <td>{{ci[2]}}</td>
-      <td>{{ci[3]}}</td>
-      <td>{{ci[4]}}</td>
-      <td>{{ci[5]}}</td>
-    </tr>
-  </tbody>
-</table>
+<h4>Earthquake Slot Information</h4>
+    {% for key, value in ci1.items() %}
+      <h4>Slot: {{key}}</h1>
+      <h4>Quakes: {{value}}</h2>
+  {% endfor %}
+
+  <h4>Earthquake Largest Information</h4>
+    {% for key, value in ci2.items() %}
+      <h4>Key: {{key}}</h1>
+      <h4>Largest: {{value}}</h2>
+  {% endfor %}
+    
 {% endblock %}

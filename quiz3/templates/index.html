@@ -2,97 +2,64 @@
 {% extends "base.html" %}
 {% block title %}EarthQuake{% endblock %}
 {% block content %}
-<h1>1001778274, Zhu Zhengyuan</h1>
-<h2>Earthquake information retrieval system</h2>
+<h1 align='center'>QCloud, Wenkang Feng, 1001989816</h1>
 
+{#<p>#}
+{#  <form action="/search_largest_n" method="get">#}
+{#   Largest earthquake in the last 30 days. <br>#}
+{#   <input type="submit" value="Search">#}
+{# </form>#}
+{# </p>#}
+{# <hr>#}
+<hr>
+{#<p>#}
+{# <form action="/search_scale" method="get">#}
+{#  Please give two magnitude values A and B. Show the number of quakes between those values in N partitions. Please input A, B, N <br>#}
+{#  Lowerbound of magnitude value A: <input type="text" name="low_bound" maxlength="200" width="60"> #}
+{#  Higherbound of magnitude value B: <input type="text" name="high_bound" maxlength="200" width="60"> #}
+{#  Partition N: <input type="text" name="parition" maxlength="200" width="60"> #}
+{#  <input type="submit" value="Search">#}
+{#</form>#}
+{#</p>#}
 <hr>
 <p>
-  <form action="{{ url_for('show_prev') }}" method="get">
-    Allow a user, through a web form, to give a three letter country code, and for each year in the data set for that country
-    <br>
-   Country Code : <input type="text" name="code" maxlength="200" width="60"> 
-   <input type="submit" name='mode1' value="RDB Calculate">
-   <input type="submit" name='mode2' value="Memcache Calculate">
-  </form>
-  {% if create_elp %}
-  <h4>Create successful. Time eplased: {{create_elp}} second</h4>
-  {% endif %}
-</p>
-<hr>
-<p>
-  <form action="{{ url_for('show_cost') }}" method="get">
-    Allow a user, through a web form, to give either a three letter country code, or a country name, 
-    and for each year in the data sets for that country, please show the cost of cigarettes as well as 
-    the (smoking) prevalence (for all matching, show country name and code): <br>
-   Country Code: <input type="text" name="code" maxlength="200" width="60"> 
-   Country Name: <input type="text" name="name" maxlength="200" width="60"> 
-   The number of times to do this query: <input type="text" name="time" maxlength="200" width="60"> 
-   
-   <input type="submit" name='mode1' value="Query to RDB">
-   <input type="submit" name='mode2' value="Query to Memcache">
-  </form>
-  {% if insert_elp %}
-  <h4>Insert successful. Time eplased: {{insert_elp}} second</h4>
-  {% endif %}
-</p>
-<hr>
-<p>
-  <form action="{{ url_for('show_range') }}" method="get">
-   Allow a user, through a web form, to give a year range, and a cost range,  
-  please show the (smoking) prevalence and cost for all countries within that range, (and show country name and code): <br>
-   Year Range from: <input type="text" name="range0" maxlength="200" width="60"> 
-   Year Range to: <input type="text" name="range1" maxlength="200" width="60"> 
-   Cost Range from : <input type="text" name="cost0" maxlength="200" width="60"> 
-   Cost Range to : <input type="text" name="cost1" maxlength="200" width="60"> 
-   The number of times to do this query: <input type="text" name="time" maxlength="200" width="60"> 
-   
-   <input type="submit" name='mode1' value="Query to RDB">
-   <input type="submit" name='mode2' value="Query to Memcache">
-  </form>
-  {% if insert_elp %}
-  <h4>Insert successful. Time eplased: {{insert_elp}} second</h4>
-  {% endif %}
-</p>
-<hr>
-<!-- <p>
- <form action="/count_scale" method="get">
-  For the date range A through B, show how many quakes greater then Z on Richter scale. Please input A, B, Z.<br>
-  Start Date[YYYY-MM-DD]: <input type="text" name="start" maxlength="200" width="60"> 
-  End Date[YYYY-MM-DD]: <input type="text" name="end" maxlength="200" width="60"> 
-  Scale: <input type="text" name="scale" maxlength="200" width="60"> 
-  <input type="submit" value="Search RDB">
-  <input type="submit" value="Search Memcache">
+ <form action="/search_volcano_by_range" method="get">
+  Using a web interface (web page) allow a user to give a range of Elev as well as
+     a range of volcano Numbers (first column) and you will show:
+     (a) all volcanoes within that range (name, country, region, lat,long, elevation).
+     (b) also show the minimum and maximum elevations for all those in that range<br>
+  Please input range_min: <input type="text" name="R1" maxlength="200" width="60">
+  Please input range_max: <input type="text" name="R2" maxlength="200" width="60">
+  <input type="submit" value="Search">
 </form>
 </p>
-<hr>
-<p>
- <form action="/search_scale" method="get">
-  Show in most recent X days, how many quakes(Richter scale) happened of: 1-2, 2-3, 3-4, 4-5, 5-6, 6-7. Please input X: 
-  Most recent day X: <input type="text" name="number" maxlength="200" width="60"> 
-  <input type="submit" value="Search RDB">
-  <input type="submit" value="Search Memcache">
+    <p>
+ <form action="/search_volcano_by_seq" method="get">
+  (a) Allow a user to give a sequence number (in vindex table) range, and for all volcanoes in that range,
+        list (similar to previous question).
+     (b) Allow a user to give a number N (for example 5), and randomly select N of those volcanoes selected by part (a),
+        and list.
+     For the previous question (11) allow a user to give you the number of times to do the "query",
+     then you will do both of the previous parts that number of times and show the results as well as the total time taken.<br>
+  Please input sequence number_min: <input type="text" name="N1" maxlength="200" width="60">
+  Please input sequence number_max: <input type="text" name="N2" maxlength="200" width="60">
+  Please input number N: <input type="text" name="NN" maxlength="200" width="60">
+ Please input number of times to do the "query": <input type="text" name="TT" maxlength="200" width="60">
+  <input type="submit" value="Search">
 </form>
 </p>
-<hr>
-<p>
-  <form action="/compare_two_place" method="get">
-    Show whether quakes common within X km of place A than place B in the last 30 days. Please input X, A, B: <br>
-    Distance: <input type="text" name="distance" maxlength="200" width="60"> 
-    Place A: <input type="text" name="placeA" maxlength="200" width="60">
-    Place B: <input type="text" name="placeB" maxlength="200" width="60">
-    <input type="submit" value="Search RDB">
-    <input type="submit" value="Search Memcache">
-  </form>
-</p>
-<hr>
-<p>
-  <form action="/largest_around_place" method="get">
-    Show where did largest quake occur within X km of Y city in the last 30 days. Please input X, Y: <br>
-    Distance: <input type="text" name="distance" maxlength="200" width="60"> 
-    City: <input type="text" name="city" maxlength="200" width="60"> 
-    <input type="submit" value="Search RDB">
-    <input type="submit" value="Search Memcache">
+    <p>
+ <form action="/search_volcano_by_seq" method="get">
+<br>Repeat the previous question using (in addition to the database) an in-memory caching mechanism
+     (NOT an in-memory database) then show us.
+  Please input sequence number_min: <input type="text" name="N1" maxlength="200" width="60">
+  Please input sequence number_max: <input type="text" name="N2" maxlength="200" width="60">
+  Please input number N: <input type="text" name="NN" maxlength="200" width="60">
+ Please input number of times to do the "query": <input type="text" name="TT" maxlength="200" width="60">
+  <input type="submit" value="Search">
 </form>
-</p> -->
+</p>
+
+
 
 {% endblock %}
