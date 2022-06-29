@@ -3,7 +3,7 @@ from flask import Flask,redirect,render_template,request
 import urllib
 import datetime
 import json
-import ibm_db
+# import ibm_db
 import pymysql
 import geocoder
 import geopy.distance
@@ -59,28 +59,28 @@ def search_n():
     return render_template('search_around_place.html', ci=rows)
 
 
-@app.route('/search_around_place', methods=['GET'])
-def search_around_place():
-    pop_start = float(request.args.get('start'))*100000
-    pop_end = float(request.args.get('end'))*100000
-    year = request.args.get('year')
-    rows = {}
-    print(pop_start, pop_end, year)
-
-    db2conn = ibm_db.connect(db2cred['ssldsn'], "","")
-    if db2conn:
-        sql = "SELECT * FROM SP4"
-        stmt = ibm_db.exec_immediate(db2conn, sql)
-        result = ibm_db.fetch_assoc(stmt)
-        while result != False:
-            for k, v in result.items():
-                if k!='STATE' and float(k[1:])==float(year):
-                    if float(pop_start)<float(v)<float(pop_end):
-                        rows[result["STATE"]] = result[k]
-            result = ibm_db.fetch_assoc(stmt)
-        # close database connection
-        ibm_db.close(db2conn)
-    return render_template('search_around_place.html', ci=rows)
+# @app.route('/search_around_place', methods=['GET'])
+# def search_around_place():
+#     pop_start = float(request.args.get('start'))*100000
+#     pop_end = float(request.args.get('end'))*100000
+#     year = request.args.get('year')
+#     rows = {}
+#     print(pop_start, pop_end, year)
+#
+#     db2conn = ibm_db.connect(db2cred['ssldsn'], "","")
+#     if db2conn:
+#         sql = "SELECT * FROM SP4"
+#         stmt = ibm_db.exec_immediate(db2conn, sql)
+#         result = ibm_db.fetch_assoc(stmt)
+#         while result != False:
+#             for k, v in result.items():
+#                 if k!='STATE' and float(k[1:])==float(year):
+#                     if float(pop_start)<float(v)<float(pop_end):
+#                         rows[result["STATE"]] = result[k]
+#             result = ibm_db.fetch_assoc(stmt)
+#         # close database connection
+#         ibm_db.close(db2conn)
+#     return render_template('search_around_place.html', ci=rows)
 
 
 
