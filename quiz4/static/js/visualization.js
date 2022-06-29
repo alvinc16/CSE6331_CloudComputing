@@ -113,8 +113,8 @@ function scatterChart(id, scatterData) {
             .data(scatter_data)
             .enter()
             .append("circle")
-            .attr("cx", function (d) { console.log(d.Year); return x(d.Year); } )
-            .attr("cy", function (d) { console.log(parseInt(d.Population)/1000000); return y(parseInt(d.Population)/1000000); } )
+            .attr("cx", function (d) { console.log(d.X); return x(d.X); } )
+            .attr("cy", function (d) { console.log(parseInt(d.Y)/1000000); return y(parseInt(d.Y)/1000000); } )
             .attr("r", 3)
             .style("fill", "#69b3a2")
     // text label for the x axis
@@ -123,7 +123,7 @@ function scatterChart(id, scatterData) {
             "translate(" + (width/2) + " ," + 
                         (height + margin.top + 20) + ")")
     .style("text-anchor", "middle")
-    .text("Year");
+    .text("X");
     // text label for the y axis
     scatter_svg.append("text")
             .attr("transform", "rotate(-90)")
@@ -131,20 +131,20 @@ function scatterChart(id, scatterData) {
             .attr("x",0 - (height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text("Polulation");   
+            .text("Y");
 
 }
 
 function dashboard(id, quakeScale, quakeData=null) {    
     var barColor = 'steelblue';
     function segColor(c){ 
-        return { "0-1":"#807dba", 
-                 "1-2":"#e08214",
-                 "2-3":"#41ab5d",
-                 "3-4":"#e01714",
-                 "4-5":"#dde014",
-                 "5-6":"#41ab6d",
-                 "6-7":"#a041ab",}[c];}
+        return { "grape":"#807dba",
+                 "fig":"#e08214",
+                 "banana":"#41ab5d",
+                 "cherry":"#e01714",
+                 "apple":"#dde014",
+                 "berry":"#41ab6d",
+                 "pear":"#a041ab",}[c];}
     
     // function to handle histogram.
     function histoGram(fD){

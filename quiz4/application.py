@@ -4,6 +4,7 @@ import urllib
 import datetime
 import json
 import ibm_db
+import pymysql
 import geocoder
 import geopy.distance
 from config import *
@@ -11,6 +12,11 @@ import time
 import pandas as pd
 
 app = Flask(__name__)
+
+DBHOST = 'localhost'
+DBUSER = 'root'
+DBPASS = '19980604'
+DBNAME = 'volcano'
 
 if 'VCAP_SERVICES' in os.environ:
     db2info = json.loads(os.environ['VCAP_SERVICES'])['dashDB For Transactions'][0]
@@ -25,37 +31,31 @@ def index():
 
 
 
-@app.route('/search_largest_n', methods=['GET'])
-def largest_n():
-    partition = float(request.args.get('partition'))
-    year = float(request.args.get('year'))
+@app.route('/search_n', methods=['GET'])
+def search_n():
+    n = int(request.args.get('n'))
+    names = str(request.args.get('names'))
+    fnames = names.split(',', n)
+    print(fnames)
     rows = {}
-    tmp = []
+    # tmp = []
+    try:
+        db = pymysql.connect(host=DBHOST, user=DBUSER, password=DBPASS, database=DBNAME)
+        print('数据库连接成功!')
+    except pymysql.Error as e:
+        print('数据库连接失败' + str(e))
+    i = 0
+    for fname in  fnames:
+        fname1 = "'" + fname + "'"
+        sql = "SELECT COUNT(*) from fruit WHERE name = " + fname1
+        cursor = db.cursor()
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        print(results)
+        rows[str(fname)] = results[0][0]
+        i = i + 1
 
-    db2conn = ibm_db.connect(db2cred['ssldsn'], "","")
-    if db2conn:
-        sql = "SELECT * FROM SP4"
-        stmt = ibm_db.exec_immediate(db2conn, sql)
-        result = ibm_db.fetch_assoc(stmt)
-        while result != False:
-            for k, v in result.items():
-                if k!='STATE' and float(k[1:])==float(year):
-                    tmp.append(v)
-            result = ibm_db.fetch_assoc(stmt)
-        # close database connection
-        ibm_db.close(db2conn)
-    maxp, minp = max(tmp), min(tmp)
-    step = int((maxp-minp)//partition)
-    print(maxp, minp)
-    
-    for i in range(minp, maxp, step):
-        for t in tmp:
-            if i<t<i+step:
-                if "{}_{}".format(str(i), str((i+step))) not in rows:
-                    rows["{}_{}".format(str(i), str((i+step)))] = 1
-                else:
-                    rows["{}_{}".format(str(i), str((i+step)))] += 1
-                    
+    print(rows)
     return render_template('search_around_place.html', ci=rows)
 
 
@@ -86,31 +86,24 @@ def search_around_place():
 
 @app.route('/search_scale', methods=['GET'])
 def search_scale():
-    state = request.args.get('state')
-    start = request.args.get('start')
-    end = request.args.get('end')
-    print(state, start, end)
-    
-    # today = datetime.date.today()
-    # ago = today - datetime.timedelta(days=number)
-    # slot01, slot12, slot23, slot34, slot45, slot56, slot67 = 0, 0, 0, 0, 0, 0, 0
+    start = int(request.args.get('start'))
+    end = int(request.args.get('end'))
+    print(start, end)
+    try:
+        db = pymysql.connect(host=DBHOST, user=DBUSER, password=DBPASS, database=DBNAME)
+        print('数据库连接成功!')
+    except pymysql.Error as e:
+        print('数据库连接失败' + str(e))
+
+    sql = "SELECT * from fruit WHERE number < " + str(end) + " AND number > " + str(start)
+    cursor = db.cursor()
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    print(results)
     scatter_attr = []
-    
-    # connect to DB2
-    db2conn = ibm_db.connect(db2cred['ssldsn'], "","")
-    if db2conn:
-        sql = "SELECT * FROM SP4 WHERE STATE=\'{}\'".format(state)
-        stmt = ibm_db.exec_immediate(db2conn, sql)
-        # fetch the result
-        
-        result = ibm_db.fetch_assoc(stmt)
-        while result != False:
-            for k, v in result.items():
-                if k!='STATE' and float(start)<=float(k[1:])<=float(end):
-                        scatter_attr.append({"Year": float(k[1:]), "Population": float(v)})
-            result = ibm_db.fetch_assoc(stmt)
-        # close database connection
-        ibm_db.close(db2conn)
+    for result in results:
+        scatter_attr.append({"X": float(result[1]), "Y": float(result[2])})
+
     print('zzzz', scatter_attr)
     return render_template('search_scale.html', sa=scatter_attr)
 
