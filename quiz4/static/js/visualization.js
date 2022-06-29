@@ -96,7 +96,7 @@ function scatterChart(id, scatterData) {
     console.log('qqq', scatter_data)
     // Add X axis
     var x = d3.scaleLinear()
-              .domain([2000, 2020])
+              .domain([0, 200])
               .range([ 0, width ]);
     scatter_svg.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -113,8 +113,8 @@ function scatterChart(id, scatterData) {
             .data(scatter_data)
             .enter()
             .append("circle")
-            .attr("cx", function (d) { console.log(d.X); return x(d.X); } )
-            .attr("cy", function (d) { console.log(parseInt(d.Y)/1000000); return y(parseInt(d.Y)/1000000); } )
+            .attr("cx", function (d) { console.log("X");console.log(d.X); return x(d.X); } )
+            .attr("cy", function (d) { console.log("Y");console.log(parseInt(d.Y)); return y(parseInt(d.Y)); } )
             .attr("r", 3)
             .style("fill", "#69b3a2")
     // text label for the x axis
